@@ -4,12 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Protocolo de 30 dias pra barriga descer mesmo dormindo mal · Guia rápido</title>
-<meta name="description" content="Protocolo de 30 dias pra mãe e pai de criança pequena: proteger o pouco sono, caminhada e força leve na ordem certa. A barriga desce sem treino exaustivo." />
+<meta name="description" content="Protocolo interativo de 30 dias pra mãe e pai de criança pequena: proteger o pouco sono, caminhada e força leve na ordem certa. A barriga desce sem treino exaustivo." />
 <meta name="theme-color" content="#0d1117" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌙</text></svg>" />
 
 <meta property="og:title" content="Protocolo de 30 dias pra barriga descer mesmo dormindo mal" />
-<meta property="og:description" content="Guia rápido. Pra quem tem criança pequena e não dorme a noite toda." />
+<meta property="og:description" content="Guia interativo. Pra quem tem criança pequena e não dorme a noite toda." />
 <meta property="og:type" content="article" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -74,7 +74,7 @@ src="https://www.facebook.com/tr?id=264800457918824&ev=PageView&noscript=1"/></n
   }
 
   /* HERO */
-  .hero{margin-bottom:56px}
+  .hero{margin-bottom:48px}
   .eyebrow{
     display:inline-block;
     font-size:12px;
@@ -102,28 +102,6 @@ src="https://www.facebook.com/tr?id=264800457918824&ev=PageView&noscript=1"/></n
     line-height:1.65;
     max-width:620px;
   }
-
-  /* TOC */
-  .toc{
-    margin-top:28px;
-    padding:18px 20px;
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:10px;
-  }
-  .toc .toc-title{
-    font-size:11.5px;
-    font-weight:700;
-    letter-spacing:1.2px;
-    text-transform:uppercase;
-    color:var(--muted-2);
-    margin-bottom:12px;
-  }
-  .toc ol{list-style:none;display:flex;flex-direction:column;gap:8px}
-  .toc ol li{font-size:14.5px}
-  .toc ol li a{color:var(--text);border-bottom:1px solid transparent;transition:border-color .15s,color .15s}
-  .toc ol li a:hover{color:var(--accent);border-bottom-color:var(--accent)}
-  .toc ol li .num{color:var(--muted-2);margin-right:10px;font-variant-numeric:tabular-nums}
 
   /* SECTIONS */
   section{margin-bottom:48px}
@@ -166,16 +144,71 @@ src="https://www.facebook.com/tr?id=264800457918824&ev=PageView&noscript=1"/></n
     line-height:1.55;
   }
 
-  /* EXERCISE / FASE CARD */
+  /* TABS */
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .tab{
+    font-family:inherit;
+    font-size:13.5px;
+    font-weight:700;
+    cursor:pointer;
+    padding:9px 16px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--muted);
+    transition:all .15s;
+  }
+  .tab:hover{border-color:var(--border-hover);color:var(--text)}
+  .tab.is-active{background:var(--accent-soft);border-color:var(--accent-border);color:#d4b3ff}
+
+  /* PROGRESS */
+  .progress-wrap{margin-bottom:22px}
+  .progress-bar{
+    height:9px;
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    border-radius:999px;
+    overflow:hidden;
+  }
+  .progress-bar span{
+    display:block;
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,var(--accent),#c026d3);
+    transition:width .35s ease;
+  }
+  .progress-text{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:9px;
+    font-size:13px;
+    color:var(--muted);
+    gap:12px;
+  }
+  .progress-text b{color:var(--text);font-weight:700}
+  .progress-text button{
+    background:none;border:none;
+    color:var(--muted-2);
+    font-size:12.5px;cursor:pointer;
+    text-decoration:underline;
+    font-family:inherit;
+    flex-shrink:0;
+  }
+  .progress-text button:hover{color:var(--accent)}
+
+  /* PANELS */
+  .panel{display:none}
+  .panel.is-active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+  /* FASE CARD */
   .exercise{
     background:var(--surface);
     border:1px solid var(--border);
     border-radius:14px;
     padding:28px 26px;
-    margin-bottom:24px;
-    transition:border-color .2s;
   }
-  .exercise:hover{border-color:var(--border-hover)}
   .exercise h3{
     font-size:22px;
     font-weight:800;
@@ -223,40 +256,55 @@ src="https://www.facebook.com/tr?id=264800457918824&ev=PageView&noscript=1"/></n
     letter-spacing:1.2px;
     text-transform:uppercase;
     color:var(--muted-2);
-    margin-bottom:8px;
+    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .label .hint{
+    text-transform:none;
+    letter-spacing:0;
+    font-weight:500;
+    color:var(--muted-2);
+    font-size:11px;
   }
 
-  .steps{
-    counter-reset:step;
+  /* CHECKLIST */
+  .checklist{
     list-style:none;
     display:flex;
     flex-direction:column;
-    gap:10px;
+    gap:8px;
     margin-bottom:20px;
   }
-  .steps li{
-    counter-increment:step;
-    font-size:15px;
-    color:var(--text);
-    padding-left:32px;
+  .checklist li.check{
     position:relative;
-    line-height:1.55;
-  }
-  .steps li::before{
-    content:counter(step);
-    position:absolute;
-    left:0;top:1px;
-    width:22px;height:22px;
-    background:var(--surface-2);
+    padding:11px 14px 11px 44px;
     border:1px solid var(--border);
-    border-radius:50%;
-    color:var(--muted);
-    font-size:12px;
-    font-weight:700;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    border-radius:9px;
+    background:var(--surface-2);
+    cursor:pointer;
+    font-size:14.5px;
+    color:var(--text);
+    line-height:1.5;
+    transition:border-color .15s,background .15s;
+    -webkit-user-select:none;user-select:none;
   }
+  .checklist li.check:hover{border-color:var(--accent-border)}
+  .checklist li.check .box{
+    position:absolute;
+    left:13px;top:11px;
+    width:20px;height:20px;
+    border:1.5px solid var(--border-hover);
+    border-radius:6px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:900;
+    color:transparent;
+    transition:all .15s;
+  }
+  .checklist li.check.done{background:var(--success-soft);border-color:var(--success-border)}
+  .checklist li.check.done .txt{color:var(--muted);text-decoration:line-through}
+  .checklist li.check.done .box{background:var(--success);border-color:var(--success);color:#06240f}
 
   .callout{
     border-radius:8px;
@@ -371,6 +419,24 @@ src="https://www.facebook.com/tr?id=264800457918824&ev=PageView&noscript=1"/></n
   }
   .offer ul.benefits li b{color:var(--text);font-weight:600}
 
+  /* CURRENCY SWITCH */
+  .cur-label{font-size:12px;color:var(--muted);margin-bottom:8px;display:block}
+  .cur-switch{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+  .cur-btn{
+    font-family:inherit;
+    font-size:12.5px;
+    font-weight:700;
+    cursor:pointer;
+    padding:7px 13px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--muted);
+    transition:all .15s;
+  }
+  .cur-btn:hover{border-color:var(--border-hover);color:var(--text)}
+  .cur-btn.is-active{background:var(--accent);border-color:var(--accent);color:#fff}
+
   .price-block{
     display:flex;
     align-items:baseline;
@@ -385,8 +451,8 @@ src="https://www.facebook.com/tr?id=264800457918824&ev=PageView&noscript=1"/></n
     color:var(--text);
     line-height:1;
   }
-  .price-block .price .euro{font-size:32px;color:var(--accent);vertical-align:10px;margin-right:2px}
-  .price-block .price-note{font-size:13.5px;color:var(--muted)}
+  .price-block .price .cur{font-size:30px;color:var(--accent);vertical-align:8px;margin-right:3px}
+  .price-block .price-note{font-size:13px;color:var(--muted);max-width:240px;line-height:1.45}
 
   .cta{
     display:inline-flex;
@@ -459,9 +525,10 @@ src="https://www.facebook.com/tr?id=264800457918824&ev=PageView&noscript=1"/></n
     .exercise{padding:24px 20px}
     .offer{padding:26px 22px}
     .price-block .price{font-size:40px}
+    .tab{padding:8px 13px;font-size:13px}
   }
   @media (prefers-reduced-motion:reduce){
-    *,*::before,*::after{transition-duration:.01s!important}
+    *,*::before,*::after{transition-duration:.01s!important;animation:none!important}
   }
 </style>
 </head>
@@ -475,16 +542,6 @@ src="https://www.facebook.com/tr?id=264800457918824&ev=PageView&noscript=1"/></n
       <p class="lead">
         Se você tem criança pequena, dormir a noite toda não é uma opção, e não adianta ninguém te mandar "durma 8 horas". A boa notícia: dá pra emagrecer a barriga sem sono perfeito. O segredo é proteger o pouco sono que você tem e deixar o movimento leve fazer parte do trabalho. Tudo na ordem certa, sem treino exaustivo.
       </p>
-
-      <nav class="toc" aria-label="Índice do protocolo">
-        <div class="toc-title">O protocolo em 3 fases + bônus</div>
-        <ol>
-          <li><a href="#fase1"><span class="num">01</span>Dias 1 a 10 · Proteger o sono possível</a></li>
-          <li><a href="#fase2"><span class="num">02</span>Dias 11 a 20 · Caminhada que compensa o cansaço</a></li>
-          <li><a href="#fase3"><span class="num">03</span>Dias 21 a 30 · Força leve que melhora o sono</a></li>
-          <li><a href="#bonus"><span class="num">+</span>Bônus · Nutrição sem dieta maluca</a></li>
-        </ol>
-      </nav>
     </header>
 
     <!-- POR QUE ISSO IMPORTA -->
@@ -506,115 +563,136 @@ src="https://www.facebook.com/tr?id=264800457918824&ev=PageView&noscript=1"/></n
       </div>
     </section>
 
-    <!-- FASE 1 -->
-    <section id="fase1" class="exercise">
-      <h3><span class="ord">FASE 1</span>Dias 1 a 10 · Proteger o sono possível</h3>
-      <div class="chips">
-        <span class="chip focus">Base de tudo</span>
-        <span class="chip">Realista pra quem tem filho</span>
-        <span class="chip reps">0 treino pesado</span>
+    <!-- PROTOCOLO INTERATIVO -->
+    <section id="protocolo">
+      <h2>O protocolo, passo a passo</h2>
+      <p>Toque nas abas pra navegar entre as fases. Marque cada passo conforme for fazendo: a página guarda o seu progresso sozinha, mesmo se você fechar e voltar depois.</p>
+
+      <div class="tabs" role="tablist">
+        <button class="tab is-active" data-tab="fase1">1 · Sono</button>
+        <button class="tab" data-tab="fase2">2 · Caminhada</button>
+        <button class="tab" data-tab="fase3">3 · Força leve</button>
+        <button class="tab" data-tab="bonus">Bônus · Comida</button>
       </div>
 
-      <div class="label">O que fazer</div>
-      <ol class="steps">
-        <li>Pare de brigar com as acordadas: elas vão acontecer. Aceitar reduz o estresse que ainda mais atrapalha o sono.</li>
-        <li>Adianta a sua hora de deitar. Se vão te acordar de madrugada, "ganhe" sono na frente indo dormir mais cedo.</li>
-        <li>Quando der, troca uma tarefa por um cochilo de 20 minutos (quando a criança dorme). 20 minutos recarregam sem te deixar grogue.</li>
-        <li>Corta cafeína depois das 14h (café, chá preto, refrigerante, pré-treino) pra o pouco que você dorme ser mais profundo.</li>
-        <li>Quarto escuro e desacelerar 30 minutos antes de deitar, com menos tela. Faz cada hora de sono render mais.</li>
-      </ol>
-
-      <div class="callout error">
-        <span class="ico">✕</span>
-        <div><b>Erro comum:</b> tentar "compensar" dormindo até tarde no fim de semana. Isso bagunça ainda mais o relógio. Melhor cochilos curtos espalhados pela semana.</div>
-      </div>
-      <div class="callout tip">
-        <span class="ico">✓</span>
-        <div><b>Dica:</b> acordou de madrugada com a cabeça a mil? Anota a tarefa num papel na cabeceira e volta a deitar. Tira o peso da cabeça e o sono volta mais fácil.</div>
-      </div>
-    </section>
-
-    <!-- FASE 2 -->
-    <section id="fase2" class="exercise">
-      <h3><span class="ord">FASE 2</span>Dias 11 a 20 · Caminhada que compensa o cansaço</h3>
-      <div class="chips">
-        <span class="chip focus">Movimento leve</span>
-        <span class="chip reps">20 a 30 min/dia</span>
-        <span class="chip">De preferência após refeição</span>
+      <div class="progress-wrap">
+        <div class="progress-bar"><span id="progressFill"></span></div>
+        <div class="progress-text">
+          <span><b id="progressDone">0</b> de <span id="progressTotal">20</span> passos concluídos</span>
+          <button id="resetBtn" type="button">limpar progresso</button>
+        </div>
       </div>
 
-      <div class="label">O que fazer</div>
-      <ol class="steps">
-        <li>Mantém tudo da Fase 1 (o sono continua prioridade).</li>
-        <li>Caminha 20 a 30 minutos por dia, num ritmo que dá pra conversar mas não pra cantar.</li>
-        <li>Dia apertado? Divide em 2 caminhadas de 10 a 15 minutos (depois do almoço e do jantar).</li>
-        <li>Caminhar depois de comer ajuda a controlar o açúcar no sangue e a vontade de doce.</li>
-        <li>Acompanha os passos no celular e sobe um pouquinho a cada poucos dias.</li>
-      </ol>
-
-      <div class="callout error">
-        <span class="ico">✕</span>
-        <div><b>Erro comum:</b> querer correr puxado já na primeira semana. Cansa, dói e você desiste. Caminhada constante ganha de treino intenso esporádico.</div>
-      </div>
-      <div class="callout tip">
-        <span class="ico">✓</span>
-        <div><b>Por que ajuda mesmo cansada:</b> caminhada leve baixa o cortisol e te ajuda a dormir mais profundo à noite. É o oposto de treino puxado, que em cima de pouco sono só estressa mais o corpo.</div>
-      </div>
-    </section>
-
-    <!-- FASE 3 -->
-    <section id="fase3" class="exercise">
-      <h3><span class="ord">FASE 3</span>Dias 21 a 30 · Força leve que melhora o sono</h3>
-      <div class="chips">
-        <span class="chip focus">Cria músculo</span>
-        <span class="chip reps">2 a 3x/semana · 20 min</span>
-        <span class="chip">Em casa, sem equipamento</span>
-      </div>
-
-      <div class="label">O que fazer</div>
-      <ol class="steps">
-        <li>Mantém sono + caminhada.</li>
-        <li>Circuito simples em casa: agachamento na cadeira, ponte de glúteo, flexão na parede, elevação de panturrilha.</li>
-        <li>Faz 2 a 3 voltas de 10 a 12 repetições de cada, descansando o que precisar entre elas.</li>
-        <li>Movimento controlado vale mais que pressa. Sente o músculo trabalhar em cada repetição.</li>
-        <li>Aumenta de leve (mais uma volta ou segurando uma garrafa de água) quando ficar fácil.</li>
-      </ol>
-
-      <div class="callout error">
-        <span class="ico">✕</span>
-        <div><b>Erro comum:</b> achar que precisa de academia, halteres e 1 hora livre. Não precisa. 20 minutos em casa, 3x por semana, já muda o corpo.</div>
-      </div>
-      <div class="callout tip">
-        <span class="ico">✓</span>
-        <div><b>Por que ajuda mesmo cansada:</b> força leve melhora a qualidade do sono profundo e cria músculo que queima gordura o dia todo, inclusive dormindo. Leve de propósito: nada de exaustão, que sabota o sono e a recuperação.</div>
-      </div>
-    </section>
-
-    <!-- BÔNUS NUTRIÇÃO -->
-    <section id="bonus" class="exercise">
-      <h3><span class="ord">BÔNUS</span>Nutrição sem dieta maluca</h3>
-      <div class="chips">
-        <span class="chip focus">Simples</span>
-        <span class="chip">Pra dia corrido</span>
-        <span class="chip reps">Sem cortar tudo</span>
+      <!-- PANEL FASE 1 -->
+      <div class="panel is-active" id="panel-fase1">
+        <div class="exercise">
+          <h3><span class="ord">FASE 1</span>Dias 1 a 10 · Proteger o sono possível</h3>
+          <div class="chips">
+            <span class="chip focus">Base de tudo</span>
+            <span class="chip">Realista pra quem tem filho</span>
+            <span class="chip reps">0 treino pesado</span>
+          </div>
+          <div class="label">O que fazer <span class="hint">· toque pra marcar</span></div>
+          <ul class="checklist">
+            <li class="check" data-id="f1-1"><span class="box">✓</span><span class="txt">Pare de brigar com as acordadas: elas vão acontecer. Aceitar reduz o estresse que ainda mais atrapalha o sono.</span></li>
+            <li class="check" data-id="f1-2"><span class="box">✓</span><span class="txt">Adianta a sua hora de deitar. Se vão te acordar de madrugada, "ganhe" sono na frente indo dormir mais cedo.</span></li>
+            <li class="check" data-id="f1-3"><span class="box">✓</span><span class="txt">Quando der, troca uma tarefa por um cochilo de 20 minutos (quando a criança dorme). 20 minutos recarregam sem te deixar grogue.</span></li>
+            <li class="check" data-id="f1-4"><span class="box">✓</span><span class="txt">Corta cafeína depois das 14h (café, chá preto, refrigerante, pré-treino) pra o pouco que você dorme ser mais profundo.</span></li>
+            <li class="check" data-id="f1-5"><span class="box">✓</span><span class="txt">Quarto escuro e desacelerar 30 minutos antes de deitar, com menos tela. Faz cada hora de sono render mais.</span></li>
+          </ul>
+          <div class="callout error">
+            <span class="ico">✕</span>
+            <div><b>Erro comum:</b> tentar "compensar" dormindo até tarde no fim de semana. Isso bagunça ainda mais o relógio. Melhor cochilos curtos espalhados pela semana.</div>
+          </div>
+          <div class="callout tip">
+            <span class="ico">✓</span>
+            <div><b>Dica:</b> acordou de madrugada com a cabeça a mil? Anota a tarefa num papel na cabeceira e volta a deitar. Tira o peso da cabeça e o sono volta mais fácil.</div>
+          </div>
+        </div>
       </div>
 
-      <div class="label">As 5 regras</div>
-      <ol class="steps">
-        <li>Proteína em toda refeição (ovo, frango, atum, iogurte natural): segura a fome e preserva o músculo.</li>
-        <li>Regra do prato: metade vegetais, uma palma de proteína, uma mão fechada de carboidrato (arroz, batata ou pão).</li>
-        <li>Não pule refeição por estar correndo: pular comida + cansaço = ataque de doce mais tarde.</li>
-        <li>Bebe água ao longo do dia: quando você está exausta, a sede se disfarça de fome.</li>
-        <li>Vontade de doce à noite (clássico de quem dorme mal)? Troca o doce puro por fruta + uma fonte de proteína (um iogurte, por exemplo). Mata a vontade sem o pico de açúcar.</li>
-      </ol>
-
-      <div class="callout error">
-        <span class="ico">✕</span>
-        <div><b>Erro comum:</b> cortar tudo de uma vez e viver de salada. Você aguenta 3 dias e desconta no fim de semana. Comida de verdade em porção controlada ganha sempre.</div>
+      <!-- PANEL FASE 2 -->
+      <div class="panel" id="panel-fase2">
+        <div class="exercise">
+          <h3><span class="ord">FASE 2</span>Dias 11 a 20 · Caminhada que compensa o cansaço</h3>
+          <div class="chips">
+            <span class="chip focus">Movimento leve</span>
+            <span class="chip reps">20 a 30 min/dia</span>
+            <span class="chip">De preferência após refeição</span>
+          </div>
+          <div class="label">O que fazer <span class="hint">· toque pra marcar</span></div>
+          <ul class="checklist">
+            <li class="check" data-id="f2-1"><span class="box">✓</span><span class="txt">Mantém tudo da Fase 1 (o sono continua prioridade).</span></li>
+            <li class="check" data-id="f2-2"><span class="box">✓</span><span class="txt">Caminha 20 a 30 minutos por dia, num ritmo que dá pra conversar mas não pra cantar.</span></li>
+            <li class="check" data-id="f2-3"><span class="box">✓</span><span class="txt">Dia apertado? Divide em 2 caminhadas de 10 a 15 minutos (depois do almoço e do jantar).</span></li>
+            <li class="check" data-id="f2-4"><span class="box">✓</span><span class="txt">Caminhar depois de comer ajuda a controlar o açúcar no sangue e a vontade de doce.</span></li>
+            <li class="check" data-id="f2-5"><span class="box">✓</span><span class="txt">Acompanha os passos no celular e sobe um pouquinho a cada poucos dias.</span></li>
+          </ul>
+          <div class="callout error">
+            <span class="ico">✕</span>
+            <div><b>Erro comum:</b> querer correr puxado já na primeira semana. Cansa, dói e você desiste. Caminhada constante ganha de treino intenso esporádico.</div>
+          </div>
+          <div class="callout tip">
+            <span class="ico">✓</span>
+            <div><b>Por que ajuda mesmo cansada:</b> caminhada leve baixa o cortisol e te ajuda a dormir mais profundo à noite. É o oposto de treino puxado, que em cima de pouco sono só estressa mais o corpo.</div>
+          </div>
+        </div>
       </div>
-      <div class="callout tip">
-        <span class="ico">✓</span>
-        <div><b>Dica:</b> deixa proteína pronta na geladeira (ovo cozido, frango desfiado). Cansada, você come o que está fácil, então deixe o certo ser o fácil.</div>
+
+      <!-- PANEL FASE 3 -->
+      <div class="panel" id="panel-fase3">
+        <div class="exercise">
+          <h3><span class="ord">FASE 3</span>Dias 21 a 30 · Força leve que melhora o sono</h3>
+          <div class="chips">
+            <span class="chip focus">Cria músculo</span>
+            <span class="chip reps">2 a 3x/semana · 20 min</span>
+            <span class="chip">Em casa, sem equipamento</span>
+          </div>
+          <div class="label">O que fazer <span class="hint">· toque pra marcar</span></div>
+          <ul class="checklist">
+            <li class="check" data-id="f3-1"><span class="box">✓</span><span class="txt">Mantém sono + caminhada.</span></li>
+            <li class="check" data-id="f3-2"><span class="box">✓</span><span class="txt">Circuito simples em casa: agachamento na cadeira, ponte de glúteo, flexão na parede, elevação de panturrilha.</span></li>
+            <li class="check" data-id="f3-3"><span class="box">✓</span><span class="txt">Faz 2 a 3 voltas de 10 a 12 repetições de cada, descansando o que precisar entre elas.</span></li>
+            <li class="check" data-id="f3-4"><span class="box">✓</span><span class="txt">Movimento controlado vale mais que pressa. Sente o músculo trabalhar em cada repetição.</span></li>
+            <li class="check" data-id="f3-5"><span class="box">✓</span><span class="txt">Aumenta de leve (mais uma volta ou segurando uma garrafa de água) quando ficar fácil.</span></li>
+          </ul>
+          <div class="callout error">
+            <span class="ico">✕</span>
+            <div><b>Erro comum:</b> achar que precisa de academia, halteres e 1 hora livre. Não precisa. 20 minutos em casa, 3x por semana, já muda o corpo.</div>
+          </div>
+          <div class="callout tip">
+            <span class="ico">✓</span>
+            <div><b>Por que ajuda mesmo cansada:</b> força leve melhora a qualidade do sono profundo e cria músculo que queima gordura o dia todo, inclusive dormindo. Leve de propósito: nada de exaustão, que sabota o sono e a recuperação.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL BÔNUS -->
+      <div class="panel" id="panel-bonus">
+        <div class="exercise">
+          <h3><span class="ord">BÔNUS</span>Nutrição sem dieta maluca</h3>
+          <div class="chips">
+            <span class="chip focus">Simples</span>
+            <span class="chip">Pra dia corrido</span>
+            <span class="chip reps">Sem cortar tudo</span>
+          </div>
+          <div class="label">As 5 regras <span class="hint">· toque pra marcar</span></div>
+          <ul class="checklist">
+            <li class="check" data-id="b-1"><span class="box">✓</span><span class="txt">Proteína em toda refeição (ovo, frango, atum, iogurte natural): segura a fome e preserva o músculo.</span></li>
+            <li class="check" data-id="b-2"><span class="box">✓</span><span class="txt">Regra do prato: metade vegetais, uma palma de proteína, uma mão fechada de carboidrato (arroz, batata ou pão).</span></li>
+            <li class="check" data-id="b-3"><span class="box">✓</span><span class="txt">Não pule refeição por estar correndo: pular comida + cansaço = ataque de doce mais tarde.</span></li>
+            <li class="check" data-id="b-4"><span class="box">✓</span><span class="txt">Bebe água ao longo do dia: quando você está exausta, a sede se disfarça de fome.</span></li>
+            <li class="check" data-id="b-5"><span class="box">✓</span><span class="txt">Vontade de doce à noite? Troca o doce puro por fruta + uma fonte de proteína (um iogurte, por exemplo). Mata a vontade sem o pico de açúcar.</span></li>
+          </ul>
+          <div class="callout error">
+            <span class="ico">✕</span>
+            <div><b>Erro comum:</b> cortar tudo de uma vez e viver de salada. Você aguenta 3 dias e desconta no fim de semana. Comida de verdade em porção controlada ganha sempre.</div>
+          </div>
+          <div class="callout tip">
+            <span class="ico">✓</span>
+            <div><b>Dica:</b> deixa proteína pronta na geladeira (ovo cozido, frango desfiado). Cansada, você come o que está fácil, então deixe o certo ser o fácil.</div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -654,13 +732,21 @@ src="https://www.facebook.com/tr?id=264800457918824&ev=PageView&noscript=1"/></n
         <li>Pagamento único. <b>Sem mensalidade, sem app.</b> É só o treino, e o treino é seu.</li>
       </ul>
 
-      <div class="price-block">
-        <div class="price"><span class="euro">€</span>7</div>
-        <div class="price-note">em até 72h · PDF personalizado</div>
+      <span class="cur-label">Ver preço na sua moeda:</span>
+      <div class="cur-switch" role="group" aria-label="Escolher moeda">
+        <button class="cur-btn" type="button" data-cur="EUR">€ EUR</button>
+        <button class="cur-btn" type="button" data-cur="BRL">R$ BRL</button>
+        <button class="cur-btn" type="button" data-cur="USD">$ USD</button>
+        <button class="cur-btn" type="button" data-cur="GBP">£ GBP</button>
       </div>
 
-      <a class="cta" href="https://buy.stripe.com/9B67sN9W5ceNaW4aNw08g00?ref=dormir-mal-e-emagrecer" target="_blank" rel="noopener">
-        <span>Quero o meu Treino Express · €7</span>
+      <div class="price-block">
+        <div class="price"><span class="cur" id="priceSymbol">€</span><span id="priceAmount">7</span></div>
+        <div class="price-note" id="priceNote">pagamento único · em até 72h</div>
+      </div>
+
+      <a class="cta" id="ctaStripe" href="https://buy.stripe.com/9B67sN9W5ceNaW4aNw08g00?ref=dormir-mal-e-emagrecer" target="_blank" rel="noopener">
+        <span>Quero o meu Treino Express</span>
         <span class="arrow">→</span>
       </a>
       <p class="cta-sub">
@@ -681,5 +767,114 @@ src="https://www.facebook.com/tr?id=264800457918824&ev=PageView&noscript=1"/></n
     </footer>
 
   </main>
+
+<script>
+(function(){
+  /* ===== ABAS ===== */
+  var tabs = document.querySelectorAll('.tab');
+  var panels = document.querySelectorAll('.panel');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      tabs.forEach(function(x){ x.classList.remove('is-active'); });
+      panels.forEach(function(p){ p.classList.remove('is-active'); });
+      t.classList.add('is-active');
+      var el = document.getElementById('panel-' + t.dataset.tab);
+      if(el) el.classList.add('is-active');
+    });
+  });
+
+  /* ===== CHECKLIST + PROGRESSO ===== */
+  var KEY = 'dme_progress_v1';
+  var done = new Set();
+  try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch(e){}
+  var items = document.querySelectorAll('.check');
+  var total = items.length;
+  var fill = document.getElementById('progressFill');
+  var doneEl = document.getElementById('progressDone');
+  var totalEl = document.getElementById('progressTotal');
+  if(totalEl) totalEl.textContent = total;
+
+  function render(){
+    items.forEach(function(li){
+      if(done.has(li.dataset.id)) li.classList.add('done');
+      else li.classList.remove('done');
+    });
+    var pct = total ? Math.round(done.size / total * 100) : 0;
+    if(fill) fill.style.width = pct + '%';
+    if(doneEl) doneEl.textContent = done.size;
+  }
+  items.forEach(function(li){
+    li.addEventListener('click', function(){
+      var id = li.dataset.id;
+      if(done.has(id)) done.delete(id); else done.add(id);
+      try { localStorage.setItem(KEY, JSON.stringify(Array.from(done))); } catch(e){}
+      render();
+      if(window.fbq && done.size === total){ fbq('trackCustom', 'ProtocoloCompleto'); }
+    });
+  });
+  var resetBtn = document.getElementById('resetBtn');
+  if(resetBtn){
+    resetBtn.addEventListener('click', function(){
+      done.clear();
+      try { localStorage.setItem(KEY, '[]'); } catch(e){}
+      render();
+    });
+  }
+  render();
+
+  /* ===== MOEDA POR PAÍS ===== */
+  /* O valor é cobrado em euros no Stripe. Aqui mostramos o equivalente
+     aproximado pra reduzir o atrito de quem não pensa em euros.
+     Pra ajustar os valores, é só editar os "amount" abaixo. */
+  var PRICES = {
+    EUR: { symbol:'€',  amount:'7',  note:'pagamento único · em até 72h' },
+    BRL: { symbol:'R$', amount:'43', note:'≈ €7 · cobrado em euros, seu banco converte' },
+    USD: { symbol:'$',  amount:'8',  note:'≈ €7 · cobrado em euros' },
+    GBP: { symbol:'£',  amount:'6',  note:'≈ €7 · cobrado em euros' }
+  };
+  function detect(){
+    var tz = '';
+    try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch(e){}
+    var brZones = ['Sao_Paulo','Bahia','Fortaleza','Recife','Maceio','Araguaina','Belem','Santarem','Manaus','Cuiaba','Campo_Grande','Boa_Vista','Porto_Velho','Rio_Branco','Noronha','Eirunepe'];
+    var usZones = ['New_York','Chicago','Denver','Los_Angeles','Phoenix','Anchorage','Detroit','Indiana','Kentucky','Boise','Honolulu'];
+    /* A localização (timezone = país onde a pessoa abre) manda. */
+    if(tz){
+      for(var i=0;i<brZones.length;i++){ if(tz.indexOf(brZones[i])>-1) return 'BRL'; }
+      if(tz === 'Europe/London') return 'GBP';
+      for(var j=0;j<usZones.length;j++){ if(tz.indexOf(usZones[j])>-1) return 'USD'; }
+      return 'EUR';
+    }
+    /* Sem timezone disponível, cai pro idioma do navegador. */
+    var lang = (navigator.language || '').toLowerCase();
+    if(lang === 'pt-br') return 'BRL';
+    if(lang === 'en-gb') return 'GBP';
+    if(lang === 'en-us') return 'USD';
+    return 'EUR';
+  }
+  var symEl = document.getElementById('priceSymbol');
+  var amtEl = document.getElementById('priceAmount');
+  var noteEl = document.getElementById('priceNote');
+  var curBtns = document.querySelectorAll('.cur-btn');
+  function setCur(c){
+    var p = PRICES[c] || PRICES.EUR;
+    if(symEl) symEl.textContent = p.symbol;
+    if(amtEl) amtEl.textContent = p.amount;
+    if(noteEl) noteEl.textContent = p.note;
+    curBtns.forEach(function(b){ b.classList.toggle('is-active', b.dataset.cur === c); });
+  }
+  curBtns.forEach(function(b){
+    b.addEventListener('click', function(){ setCur(b.dataset.cur); });
+  });
+  setCur(detect());
+
+  /* ===== TRACKING CTA ===== */
+  var cta = document.getElementById('ctaStripe');
+  if(cta){
+    cta.addEventListener('click', function(){
+      if(window.fbq) fbq('track', 'InitiateCheckout');
+    });
+  }
+})();
+</script>
 </body>
 </html>
