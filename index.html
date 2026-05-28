@@ -732,25 +732,24 @@ src="https://www.facebook.com/tr?id=264800457918824&ev=PageView&noscript=1"/></n
         <li>Pagamento único. <b>Sem mensalidade, sem app.</b> É só o treino, e o treino é seu.</li>
       </ul>
 
-      <span class="cur-label">Ver preço na sua moeda:</span>
+      <span class="cur-label">Preço na sua moeda (detectado pela sua localização):</span>
       <div class="cur-switch" role="group" aria-label="Escolher moeda">
         <button class="cur-btn" type="button" data-cur="EUR">€ EUR</button>
         <button class="cur-btn" type="button" data-cur="BRL">R$ BRL</button>
         <button class="cur-btn" type="button" data-cur="USD">$ USD</button>
-        <button class="cur-btn" type="button" data-cur="GBP">£ GBP</button>
       </div>
 
       <div class="price-block">
         <div class="price"><span class="cur" id="priceSymbol">€</span><span id="priceAmount">7</span></div>
-        <div class="price-note" id="priceNote">pagamento único · em até 72h</div>
+        <div class="price-note" id="priceNote">Pagamento único · Cartão · MB Way · SEPA</div>
       </div>
 
-      <a class="cta" id="ctaStripe" href="https://buy.stripe.com/9B67sN9W5ceNaW4aNw08g00?ref=dormir-mal-e-emagrecer" target="_blank" rel="noopener">
-        <span>Quero o meu Treino Express</span>
+      <a class="cta" id="ctaBuy" href="https://buy.stripe.com/9B67sN9W5ceNaW4aNw08g00?ref=dormir-mal-e-emagrecer" target="_blank" rel="noopener">
+        <span id="ctaText">Quero o meu Treino Express · €7</span>
         <span class="arrow">→</span>
       </a>
       <p class="cta-sub">
-        Pagamento seguro · Cartão · MB Way · SEPA<br />
+        Compra segura via <span id="ctaProvider">Stripe (Europa)</span><br />
         Quer entender melhor antes? <a href="https://ptlucaslima.pt/treino-express/" target="_blank" rel="noopener">Conhecer a página completa →</a>
       </p>
     </section>
@@ -822,55 +821,77 @@ src="https://www.facebook.com/tr?id=264800457918824&ev=PageView&noscript=1"/></n
   }
   render();
 
-  /* ===== MOEDA POR PAÍS ===== */
-  /* O valor é cobrado em euros no Stripe. Aqui mostramos o equivalente
-     aproximado pra reduzir o atrito de quem não pensa em euros.
-     Pra ajustar os valores, é só editar os "amount" abaixo. */
+  /* ===== MOEDA + LINK POR PAÍS (mesma lógica do site completo) =====
+     Brasil → MFit (BRL).  Europa → Stripe (EUR).  Outros → Stripe (USD).
+     País detectado por IP (api.country.is), com cache de 24h e botões
+     manuais como override. Pra ajustar valores, edite os "amount" abaixo. */
+  var STRIPE_LINK = 'https://buy.stripe.com/9B67sN9W5ceNaW4aNw08g00?ref=dormir-mal-e-emagrecer';
+  var MFIT_LINK   = 'https://pages.mfitpersonal.com.br/index?acao=page&tipo=2&buyPage=122115&page=122115';
   var PRICES = {
-    EUR: { symbol:'€',  amount:'7',  note:'pagamento único · em até 72h' },
-    BRL: { symbol:'R$', amount:'43', note:'≈ €7 · cobrado em euros, seu banco converte' },
-    USD: { symbol:'$',  amount:'8',  note:'≈ €7 · cobrado em euros' },
-    GBP: { symbol:'£',  amount:'6',  note:'≈ €7 · cobrado em euros' }
+    EUR: { symbol:'€',  amount:'7',  label:'€7',    methods:'Pagamento único · Cartão · MB Way · SEPA', provider:'Stripe (Europa)',     link:STRIPE_LINK },
+    USD: { symbol:'$',  amount:'8',  label:'$8',    methods:'Pagamento único · Card · Apple Pay · Link', provider:'Stripe (EUA/outros)', link:STRIPE_LINK },
+    BRL: { symbol:'R$', amount:'39', label:'R$ 39', methods:'Pagamento único · Pix · Cartão · Boleto',   provider:'MFit (Brasil)',      link:MFIT_LINK }
   };
-  function detect(){
-    var tz = '';
-    try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch(e){}
-    var brZones = ['Sao_Paulo','Bahia','Fortaleza','Recife','Maceio','Araguaina','Belem','Santarem','Manaus','Cuiaba','Campo_Grande','Boa_Vista','Porto_Velho','Rio_Branco','Noronha','Eirunepe'];
-    var usZones = ['New_York','Chicago','Denver','Los_Angeles','Phoenix','Anchorage','Detroit','Indiana','Kentucky','Boise','Honolulu'];
-    /* A localização (timezone = país onde a pessoa abre) manda. */
-    if(tz){
-      for(var i=0;i<brZones.length;i++){ if(tz.indexOf(brZones[i])>-1) return 'BRL'; }
-      if(tz === 'Europe/London') return 'GBP';
-      for(var j=0;j<usZones.length;j++){ if(tz.indexOf(usZones[j])>-1) return 'USD'; }
-      return 'EUR';
-    }
-    /* Sem timezone disponível, cai pro idioma do navegador. */
-    var lang = (navigator.language || '').toLowerCase();
-    if(lang === 'pt-br') return 'BRL';
-    if(lang === 'en-gb') return 'GBP';
-    if(lang === 'en-us') return 'USD';
-    return 'EUR';
+  var EUR_COUNTRIES = {PT:1,ES:1,FR:1,DE:1,IT:1,NL:1,BE:1,IE:1,AT:1,FI:1,GR:1,LU:1,MT:1,CY:1,EE:1,LV:1,LT:1,SK:1,SI:1,HR:1,DK:1,SE:1,PL:1,CZ:1,HU:1,RO:1,BG:1,NO:1,IS:1,CH:1,LI:1,AD:1,MC:1,SM:1,VA:1,GB:1};
+  function currencyForCountry(c){
+    if(c === 'BR') return 'BRL';
+    if(EUR_COUNTRIES[c]) return 'EUR';
+    return 'USD';
   }
+
   var symEl = document.getElementById('priceSymbol');
   var amtEl = document.getElementById('priceAmount');
   var noteEl = document.getElementById('priceNote');
+  var ctaEl = document.getElementById('ctaBuy');
+  var ctaText = document.getElementById('ctaText');
+  var ctaProvider = document.getElementById('ctaProvider');
   var curBtns = document.querySelectorAll('.cur-btn');
-  function setCur(c){
+  var userPicked = false;
+
+  function applyCurrency(c){
     var p = PRICES[c] || PRICES.EUR;
     if(symEl) symEl.textContent = p.symbol;
     if(amtEl) amtEl.textContent = p.amount;
-    if(noteEl) noteEl.textContent = p.note;
+    if(noteEl) noteEl.textContent = p.methods;
+    if(ctaEl) ctaEl.href = p.link;
+    if(ctaText) ctaText.textContent = 'Quero o meu Treino Express · ' + p.label;
+    if(ctaProvider) ctaProvider.textContent = p.provider;
     curBtns.forEach(function(b){ b.classList.toggle('is-active', b.dataset.cur === c); });
   }
   curBtns.forEach(function(b){
-    b.addEventListener('click', function(){ setCur(b.dataset.cur); });
+    b.addEventListener('click', function(){ userPicked = true; applyCurrency(b.dataset.cur); });
   });
-  setCur(detect());
+
+  function getCachedCountry(){
+    try { var raw = localStorage.getItem('llCountry'); if(!raw) return null;
+      var o = JSON.parse(raw); if(!o || (Date.now() - o.t) > 86400000) return null; return o.c;
+    } catch(e){ return null; }
+  }
+  function setCachedCountry(c){ try { localStorage.setItem('llCountry', JSON.stringify({c:c, t:Date.now()})); } catch(e){} }
+
+  /* override de teste: ?force=BR, ?force=US, ?force=PT */
+  var forceMatch = (location.search || '').match(/[?&]force=([A-Z]{2})/i);
+  if(forceMatch){
+    userPicked = true;
+    applyCurrency(currencyForCountry(forceMatch[1].toUpperCase()));
+  } else {
+    applyCurrency('EUR');
+    var cached = getCachedCountry();
+    if(cached) applyCurrency(currencyForCountry(cached));
+    fetch('https://api.country.is/', { cache:'no-store' })
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if(d && d.country){
+          setCachedCountry(d.country);
+          if(!userPicked) applyCurrency(currencyForCountry(d.country));
+        }
+      })
+      .catch(function(){});
+  }
 
   /* ===== TRACKING CTA ===== */
-  var cta = document.getElementById('ctaStripe');
-  if(cta){
-    cta.addEventListener('click', function(){
+  if(ctaEl){
+    ctaEl.addEventListener('click', function(){
       if(window.fbq) fbq('track', 'InitiateCheckout');
     });
   }
